@@ -1,5 +1,5 @@
 <template>
-  <main class="home">
+  <main id="home">
     <Top v-if="activeCard" 
     :top="{title: 'E-Wallet', type: 'Active Card'}" />
     <Top v-else 
@@ -23,7 +23,8 @@ import CardStack from '@/components/CardStack'
 export default {
   name: 'Home',
   components: {Top, Card, CardStack},
-  data(){return{
+  data(){
+    return{
     activeIndex: 0
   }},
   

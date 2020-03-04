@@ -16,7 +16,8 @@ import CardForm from '@/components/CardForm'
 export default {
   name: 'AddCard',
   components: {Top, Card, CardForm},
-  data(){return{
+  data(){
+    return{
     newCard: {
         name: "",
         number: "",
