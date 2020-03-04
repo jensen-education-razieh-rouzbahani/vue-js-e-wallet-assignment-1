@@ -1,13 +1,14 @@
 <template>
-<main id="add-card">
+  <main id="add-card">
     <Top :top="{title: 'Add New Card', type: 'New Card'}" />
-    <Card :card="newCard" />
-    <CardForm @formCard="mergeCards"/>
+    <Card :card="newCard"/>
+    <CardForm 
+    @emitFormCard="mergeCards"/>
     <a class="cta" @click="pushCard">Add Card</a>
     <a class="cta" @click="routerPush">Cancel</a>
-    <!-- <router-link class="cta" to="/">Add Card</router-link> -->
-</main>
+  </main>
 </template>
+
 <script>
 import Top from '@/components/Top'
 import Card from '@/components/Card' 
@@ -15,15 +16,15 @@ import CardForm from '@/components/CardForm'
 export default {
   name: 'AddCard',
   components: {Top, Card, CardForm},
-  data() { 
-    return {
+  data(){return{
     newCard: {
-      name: "",
-      number: "",
-      valid: "",
-      vendor: "bitcoin",
-      id: Date.now()
-    }
+        name: "",
+        number: "",
+        year: "YY",
+        month: "MM",
+        vendor: "bitcoin",
+        id: Date.now()
+      }
   }},
   methods: {
     mergeCards(formCard) {
@@ -31,15 +32,16 @@ export default {
     },
     pushCard() {
       this.$root.$data.cards.push(this.newCard);
-      this.routerPush('/');
+      this.$router.push('/');
     },
     routerPush() {
-      if(JSON.parse(localStorage.getItem('cards')).length > 0) {
+      if (JSON.parse(localStorage.getItem('cards')).length > 0){
         this.$router.push('/');
       }
       
     }
   }
+  
   
 }
 </script>

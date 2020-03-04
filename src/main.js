@@ -6,19 +6,25 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
-  data: () => ({
+  data() {
+    return{
     cards: []
-  }),
+  }},
   created() {
-    if(JSON.parse(localStorage.getItem('cards')).length > 0) {
+    if (JSON.parse(localStorage.getItem('cards')).length > 0) {
       try {
         this.cards = JSON.parse(localStorage.getItem('cards'));
-      }catch(e) {
+      } catch(e) {
         localStorage.removeItem('cards');
       }
     } else {
       this.$router.push('/addcard')
     }
+  },
+  methods: {
+    removeCard(activeIndex) {
+      this.cards.splice(activeIndex, 1)
+  }
   },
   watch: {
     cards(newCards) {
